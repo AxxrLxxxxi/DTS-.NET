@@ -6,21 +6,34 @@ namespace Vacancy_Sortir
 	{
 		static void Main(string[] args)
 		{
-			int[] id = new int[10];
+			Data();
+		}
+		
+		static void Data()
+		{
+			int [] id = new int[10];
+			string [] name = new string[10];
+			int jumlah = 0;
 			
-			for(int i=1; i<=10; i++)
+			if(jumlah<=10)
 			{
-				Console.WriteLine("Masukan Id Pelamar ke - " + i);
-				id[i] = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Masukan Nama Pelamar: ");
-			}
-			
-			Console.WriteLine("===================================");
-			
-			foreach(var hasil in id)
-			{
-				Console.WriteLine("Berikut adalah data yang berhasil ditambahkan: ");
-				Console.WriteLine(hasil);
+				for(int i=1; i<=10; i++)
+				{
+					Console.WriteLine("Masukan Id Pelamar ke - " + i);
+					id[i] = Convert.ToInt32(Console.ReadLine());
+					if(id[i]!=0)
+					{
+						Console.WriteLine("Masukan Nama Pelamar ke - " + i);
+						name[i] = Console.ReadLine();
+					}
+				}
+			}else{
+				Console.WriteLine("===================================");
+				foreach(var hasil in id)
+				{
+					Console.WriteLine("Berikut adalah data yang berhasil ditambahkan: ");
+					Console.WriteLine(hasil);
+				}
 			}
 		}
 	}
