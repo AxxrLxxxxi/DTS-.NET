@@ -133,7 +133,64 @@ namespace SIBKMNet
         }
 
         // Update
-        void 
+        void Update(Country country)
+        {
+            using(SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
+
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                sqlCommand.Transaction = sqlTransaction;
+
+                SqlParameter sqlParameter = new SqlParameter();
+                sqlParameter.ParameterName = "@name";
+                sqlParameter.Value = country.Name;
+
+                sqlCommand.Parameters.Add(sqlParameter);
+
+                try
+                {
+                    sqlCommand.CommandText = "UPDATE FROM Country " +
+                        "SET (Name) WHERE (@name)";
+                    sqlCommand.ExecuteNonQuery();
+                    sqlTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException);
+                }
+            }
+        }
         // Delete
+        void Delete(Country country)
+        {
+            using(SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
+
+                SqlCommand sqlCommand = sqlConnection.CreateCommand();
+                sqlCommand.Transaction = sqlTransaction;
+
+                SqlParameter sqlParameter = new SqlParameter();
+                sqlParameter.ParameterName = "@name";
+                sqlParameter.Value = country.Name;
+
+                sqlCommand.Parameters.Add(sqlParameter);
+
+                try
+                {
+                    sqlCommand.CommandText = "DELETE FROM Country " +
+                        "(Name) WHERE (@name)";
+                    sqlCommand.ExecuteNonQuery();
+                    sqlTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException);
+                }
+            }
+        }
     }
 }
